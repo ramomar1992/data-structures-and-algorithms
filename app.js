@@ -1,42 +1,13 @@
-const extractStat = (statName, arr) => {
+const divisibleByFiveTwoToThePower = (input) => {
   // Solution code here...
-  let result = arr.reduce((acc, val) => {
-    if (val.stat.name == statName) {
-      acc = val;
-      return acc;
-    } else {
-      return acc;
-    }
-  }, {});
-  return (result == {}) ? null : result;
-};
-const snorlaxData = {
-  stats: [{
-      stat: {
-        url: 'https://pokeapi.co/api/v2/stat/6/',
-        name: 'speed',
-      },
-      effort: 5,
-      baseStat: 30,
-    },
-    {
-      stat: {
-        url: 'https://pokeapi.co/api/v2/stat/5/',
-        name: 'special-defense',
-      },
-      effort: 2,
-      baseStat: 110,
-    },
-    {
-      stat: {
-        url: 'https://pokeapi.co/api/v2/stat/4/',
-        name: 'special-attack',
-      },
-      effort: 9,
-      baseStat: 65,
-    },
-  ],
-  name: 'snorlax',
-  weight: 4600,
-};
-console.log(extractStat('speed', snorlaxData.stats));
+  return input
+    .map(val => val
+      .filter(val2 => val2 % 5 == 0 && Number(val2) === val2)
+      .map(val3 => Math
+        .pow(2, val3)));
+}
+console.log(divisibleByFiveTwoToThePower([
+  ['one', 'two', 'five'],
+  ['5', '10', '15'],
+  [5]
+]));
