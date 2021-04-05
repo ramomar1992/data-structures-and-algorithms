@@ -1,5 +1,12 @@
-const validatePhoneNumber = (phoneNumber) => {
+const findMax = (matrix) => {
   // Solution code here...
-  return /^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$/.test(phoneNumber);
+  return matrix.reduce((acc, val) => {
+    let max = val.reduce((acc2, val2) => acc2 > val2 ? acc2 : val2, 0);
+    return acc > max ? acc : max;
+  }, 0);
 };
-console.log(validatePhoneNumber('(222 222-2222'));
+console.log(findMax([
+  [13, 24, 24, 2],
+  [2, 5, 6],
+  [2, 3]
+]));
