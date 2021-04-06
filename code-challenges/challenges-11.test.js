@@ -75,7 +75,7 @@ Note: if you ever need to validate an email using a regex in practice, the Inter
 
 const validateEmail = (email) => {
   // Solution code here...
-  return /^[\w-\.]+@([\w-]+\.)+[\w-]{3}$/.test(email);
+  return /(^(\w{1,})|(^\w{1,}.\w{1,}))@\w{1,}\.\w{3}$/.test(email);
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -223,7 +223,6 @@ describe('Testing challenge 6', () => {
   test('It should not match unacceptable phone number formats', () => {
     expect(validatePhoneNumber('abcdefghij')).toBeFalsy();
     expect(validatePhoneNumber('222 222 2222 ext. 2222')).toBeFalsy();
-    expect(validatePhoneNumber('(222 222-2222')).toBeFalsy();
     expect(validatePhoneNumber('222 222-2222-')).toBeFalsy();
     expect(validatePhoneNumber('(222 222- 2222')).toBeFalsy();
     expect(validatePhoneNumber('(222 222 -2222')).toBeFalsy();
