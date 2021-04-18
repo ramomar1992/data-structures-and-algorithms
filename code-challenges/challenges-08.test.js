@@ -81,7 +81,7 @@ For example, notInFirstArray([1,2,3], [1,2,3,4]) returns [4].
 
 const notInFirstArray = (forbiddenValues, arr) => {
   // Solution code here...
-  return arr.filter(a => !forbiddenValues.includes(a));
+  return arr.filter(val => !forbiddenValues.includes(val));
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -124,9 +124,7 @@ const snorlaxData = {
 
 const getBaseStatGreaterThan = (arr, minBaseStat) => {
   // Solution code here...
-  return arr.filter(a => {
-    return a.baseStat > minBaseStat;
-  })
+  return arr.filter(elem => elem.baseStat > minBaseStat);
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -139,10 +137,8 @@ For example, getStatName(snorlaxData.stats, 50) will return ['special-defense', 
 
 const getStatName = (arr, minBaseStat) => {
   // Solution code here...
-  let desiredObjs = getBaseStatGreaterThan(arr, minBaseStat);
-  let arr2 = [];
-  desiredObjs.forEach(elem => arr2.push(elem.stat.name))
-  return arr2;
+  let processData = getBaseStatGreaterThan(arr, minBaseStat);
+  return processData.map(elem => elem.stat.name);
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -195,7 +191,7 @@ const characters = [{
 
 const getCharactersWithoutChildren = (arr) => {
   // Solution code here...
-  return arr.filter(a => !a.children);
+  return arr.filter(elem => !elem.children);
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -208,8 +204,8 @@ For example: evenOddNumericValues(['Gregor', 2, 4, 1]) returns ['even', 'even', 
 
 const evenOddNumericValues = (arr) => {
   // Solution code here...
-  let numArr = arr.filter(a => (a === Number(a)) ? true : false);
-  return numArr.map(a => (a % 2) ? 'odd' : 'even');
+  let filterArr = arr.filter(elem => Number(elem) === elem);
+  return filterArr.map(elem => (elem % 2 == 0) ? 'even' : 'odd');
 };
 
 /* ------------------------------------------------------------------------------------------------

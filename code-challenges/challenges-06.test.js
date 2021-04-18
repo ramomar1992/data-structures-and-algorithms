@@ -126,11 +126,13 @@ HR has asked you to change the data to make it easier to print so that it looks 
 
 const updateNumbers = (obj) => {
   // Solution code here...
-  let arr = [];
-  Object.entries(obj).forEach(entry => {
-    arr.push(entry.join(': '));
+  let entrArr = Object.entries(obj);
+  let resArr = [];
+  entrArr.forEach(elem => {
+    resArr.push(elem.join(': '))
   });
-  return arr;
+    return resArr;
+
 };
 
 
@@ -250,9 +252,17 @@ For example: [ { house: 'Stark', members: 6 }, { house: 'Arryn', members: 2 }, .
 const deceasedSpouses = ['Catelyn', 'Lysa', 'Robert', 'Khal Drogo', 'Alerie'];
 
 const houseSurvivors = (arr) => {
-  const survivors = [];
   // Solution code here...
-  return survivors;
+  const survivors = [];
+  arr.forEach(char => {
+    survivors.push({
+      house: Object.values(char)[3],
+      members: 1 + Object.values(char)[2].length + (Object.values(char)[1] && (!deceasedSpouses.includes(Object.values(char)[1])) ? 1 : 0)
+    });
+  });
+  return survivors.sort((a, b) => {
+    return a.members - b.members;
+  });
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -349,7 +359,7 @@ describe('Testing challenge 9', () => {
   });
 });
 
-xdescribe('Testing challenge 10', () => {
+describe('Testing challenge 10', () => {
   test('It should not include any deceased spouses', () => {
     expect(houseSurvivors(characters)).toStrictEqual([{
       house: 'Greyjoy',

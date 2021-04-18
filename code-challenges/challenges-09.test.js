@@ -129,10 +129,10 @@ let starWarsData = [{
 
 const returnNames = (arr) => {
   // Solution code here...
-  return Object.values(arr.reduce((acc, obj, idx) => {
-    acc[idx] = obj.name;
+  return arr.reduce((acc, elem) => {
+    acc.push(elem.name);
     return acc;
-  }, {}));
+  },[])
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -146,8 +146,8 @@ Note: You must use reduce for this challenge. You may not use the built-in .reve
 const reversedString = (str) => {
   // Solution code here...
   let strArr = str.split('');
-  return strArr.reduce((acc, val, idx) => {
-    return acc += strArr[strArr.length - idx - 1];
+  return strArr.reduce((acc, val) => {
+    return val+acc;
   }, '')
 };
 
@@ -201,14 +201,11 @@ const characters = [{
 
 const countNumberOfChildren = (arr) => {
   // Solution code here...
-  return arr.reduce((acc, val, idx) => {
-    if (val.children) {
-      return acc += val.children.length;
-    } else {
-      return acc;
-    }
+  return arr.reduce((acc, elem) => {
+    return (elem.children) ? acc + elem.children.length : acc;
   }, 0)
-};
+}
+
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 8 - Stretch Goal
@@ -220,9 +217,12 @@ Hint: The accumulator should begin as { count: 0, sum: 0 }
 
 const calculateAverage = (arr) => {
   // Solution code here...
-  return arr.reduce((acc, val, idx) => {
-    return acc += val;
-  }, 0) / arr.length;
+  let process = arr.reduce((acc, val) => {
+    acc.count += 1;
+    acc.sum += val;
+    return acc;
+  }, { count: 0, sum: 0 });
+  return process.sum / process.count;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -244,14 +244,10 @@ const isPrime = (value) => {
 
 const countPrimeNumbers = (arr) => {
   // Solution code here...
-  return arr.reduce((acc, val) => {
-    if (isPrime(val)) {
-      return acc += 1;
-    } else {
-      return acc;
-    }
-  }, 0);
-};
+  return arr.reduce((accum, elem) => {
+    return isPrime(elem) ? ++accum : accum;
+  }, 0)
+}
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 10 - Stretch Goal
@@ -297,11 +293,10 @@ const extractStat = (statName, arr) => {
     if (val.stat.name == statName) {
       acc = val;
       return acc;
-    } else {
-      return acc;
     }
+    return acc;
   }, {});
-  return (result == {}) ? null : result;
+  return (result.stat) ? result : null;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -316,8 +311,11 @@ Write a function named extractChildren that, given the array of characters from 
 
 const extractChildren = (arr) => {
   // Solution code here...
-  return arr.filter(elem => elem.name.toUpperCase().indexOf('A') > -1).reduce((accum, item) => {
-    return (item.children) ? [...accum, ...item.children] : accum;
+  let process = arr.filter(elem => {
+    return elem.name.toUpperCase().includes('A');
+  });
+  return process.reduce((accum, item) => {
+    return (item.children) ? accum.concat(item.children) : accum;
   }, []);
 };
 
